@@ -1,9 +1,11 @@
-#!/usr/bin/python3
+#!/usr/env/dev1
 import os
 import random
 from time import sleep
 import numpy as np
 #get size of terminal
+
+#move to function because, 
 rows, columns = os.popen('stty size', 'r').read().split()
 
 rows =(int(rows) )
@@ -18,33 +20,13 @@ dead=" "
 
 #create create game board function. This one.
 def init_board(x,y):
-    
-    grid=np.random.randint(1, size=(x, y), dtype=bool)
-    
-    for a in range(int(x)): 
-         for b in range(int(y)):
-            print("Generating X:", str(a), " Y:", str(b))
-            if random.randint(1, 100) > 90 : 
-              grid[a][b]=1
-            else:
-              grid[a][b]=0
-    
-    return grid;
-
+    return np.array(np.array([ x - 90 for x in np.random.randint(1,100, size=(x,y))]).clip(min=0), dtype=bool);
 
 
 
 #too many lists
 def print_board(thing):
-
-    for x in range(len(thing)):
-        for y in range(len(thing[x])):
-            if thing[x][y] == True :
-               print(alive, end = '')
-            else: 
-               print(dead, end= '')
-        print()
-
+    print('\n'.join(' '.join(map(str, x))  for x in grid).replace("False", " ").replace("True","x"))
     return;
 
 
@@ -97,5 +79,6 @@ if __name__ == "__main__":
   os.system('clear')  
   print_board(grid)
   grid=adv_board(grid)
+  
 
 

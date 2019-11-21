@@ -1,4 +1,4 @@
-#testing
+
 import os
 import random
 from time import sleep
@@ -19,25 +19,19 @@ columns = int( xwidth / pixel_count )
 import tkinter
 
 
-
-
-def gui_print_board(grid, workspace):
-  for x in range(0, xwidth, pixel_count):
-    a=int(x/pixel_count)
-    for y in range(0, xheight, pixel_count):
-      print("1")
-      w = Canvas(master, width=xwidth, height=xheight)
-      print("2")
-      b=int(y/pixel_count)
-      if grid[a][b] == True : 
+def gui_def_unit(x,y,grid,workspace):
+      if grid[int(x/pixel_count)][int(y/pixel_count)] == True : 
         workspace.create_rectangle(x, y, int(x+pixel_count), int(y+pixel_count), fill=alive_color, outline = 'grey')
-        print("3")
       else: 
         workspace.create_rectangle(x, y, int(x+pixel_count), int(y+pixel_count), fill=dead_color, outline = 'black')
-        print("3")  
-      workspace.pack()
-      print("4")
-  return;
+
+      
+
+def gui_print_board(grid, workspace):
+    w = Canvas(master, width=xwidth, height=xheight)
+    [ [ gui_def_unit(x,y,grid, workspace) for y in range(0, xheight, pixel_count)] for x in range(0, xwidth, pixel_count)]
+    workspace.pack()
+    return;
 
 
 	
@@ -76,15 +70,9 @@ if __name__ == "__main__":
  master, w=gui_board_init()
  
  while True:
-   #  print("1")
      grid=adv_board(grid)
-   #  print("2")
      gui_print_board(grid, w)
-   #  print("3")
-    # sleep(0.005)
-   #  print("4")
      w.update()
-   #  print("5")
      w.delete(ALL)
  
  
