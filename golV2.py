@@ -26,7 +26,7 @@ def init_board(x,y):
 
 #too many lists
 def print_board(thing):
-    print('\n'.join(' '.join(map(str, x))  for x in grid).replace("False", " ").replace("True","x"))
+    print('\n'.join(' '.join(map(str, x))  for x in grid).replace("False", dead).replace("True",alive))
     return;
 
 
@@ -46,14 +46,14 @@ def get_ajacent(x, y, grid2):
 
 
 
-def adv_unit(x, y, grid2):
-    adj=get_ajacent(x, y, grid2)
+def adv_unit(x, y, grid):
+    adj=get_ajacent(x, y, grid)
     #if alive, and starving
-    if   grid2[x][y]  == True and \
+    if   grid[x][y]  == True and \
      ( adj == 2 or adj == 3 )  : 
          unit = True
     #if dead, but well feed
-    elif grid2[x][y] == False and adj == 3: 
+    elif grid[x][y] == False and adj == 3: 
          unit = True
     else:
          unit = False
@@ -61,8 +61,8 @@ def adv_unit(x, y, grid2):
 
 #move forward one frame
 def adv_board(grid):
-    grid3=[[ adv_unit(x, y, grid) for y in range(len(grid[x]))] for x in range(len(grid)) ]
-    return grid3;
+    
+    return [[ adv_unit(x,y,grid) for y in range(len(grid[x]))] for x in range(len(grid)) ];
 
 
 

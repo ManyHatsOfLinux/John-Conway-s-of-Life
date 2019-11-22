@@ -8,8 +8,8 @@ import tkinter
 from datetime import datetime
 import datetime as dt
 
-xheight=400
-xwidth=800
+xheight=1000
+xwidth=1000
 delay=1
 pixel_count=4
 
@@ -27,9 +27,8 @@ def gui_def_unit(x,y,z,workspace):
       else:
         workspace.create_rectangle(x, y, int(x+pixel_count), int(y+pixel_count), fill=dead_color, outline = 'black')
 
-
 def gui_print_board(grid, workspace):
-    [ [ gui_def_unit(x,y,grid[int(x/pixel_count)][int(y/pixel_count)], workspace) for y in range(0, xwidth, pixel_count)] for x in range(0, xheight, pixel_count)]
+    [ [ gui_def_unit(y,x,grid[int(x/pixel_count)][int(y/pixel_count)], workspace) for y in range(0, xwidth, pixel_count)] for x in range(0, xheight, pixel_count)]
     return;
 
 
