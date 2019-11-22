@@ -1,4 +1,4 @@
-#!/usr/env/dev1
+#!/usr/bin/env python
 import os
 import random
 from time import sleep
@@ -20,7 +20,7 @@ dead=" "
 
 #create create game board function. This one.
 def init_board(x,y):
-    return np.array(np.array([ x - 90 for x in np.random.randint(1,100, size=(x,y))]).clip(min=0), dtype=bool);
+    return np.array(np.array([ a - 90 for a in np.random.randint(1,100, size=(x,y))]).clip(min=0), dtype=bool);
 
 
 
@@ -75,8 +75,8 @@ if __name__ == "__main__":
 
  grid=init_board(rows, columns)
 
- for x in range(10000000000000000000000000000000000000000000000000000):
-  os.system('clear')  
+ for x in range(50):
+  
   print_board(grid)
   grid=adv_board(grid)
   
