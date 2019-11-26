@@ -6,16 +6,24 @@ import numpy as np
 #get size of terminal
 
 #move to function because, 
-rows, columns = os.popen('stty size', 'r').read().split()
+grid_x, grid_y = os.popen('stty size', 'r').read().split()
 
-rows =(int(rows) )
-columns =(int(columns) )
+grid_x =(int(grid_x) )
+grid_y =(int(grid_y) )
 
-#rows=50
-#columns=500
+
 
 alive="x"
 dead=" "
+
+
+
+
+
+
+
+
+
 
 
 #create create game board function. This one.
@@ -25,7 +33,7 @@ def init_board(x,y):
 
 
 #too many lists
-def print_board(thing):
+def print_board(grid):
     print('\n'.join(' '.join(map(str, x))  for x in grid).replace("False", dead).replace("True",alive))
     return;
 
@@ -69,16 +77,35 @@ def adv_board(grid):
 
 
 
+class game_board:
+       
+    def __init__(self, grid_x, grid_y):
+        self.grid = init_board(grid_x, grid_y)
+        self.grid_x = grid_x
+        self.grid_y = grid_y
+    
+    def update(self):
+        self.grid= adv_board(self.grid)
+    
+    def print(self):
+        print_board(self.grid)
+
+
+
+
+
+
 
 if __name__ == "__main__":
 	
 
- grid=init_board(rows, columns)
+ 
+ game=game_board(grid_x, grid_y)
+ 
 
  for x in range(50):
-  
-  print_board(grid)
-  grid=adv_board(grid)
-  
+   game.update()
+   game.print() 
+
 
 
